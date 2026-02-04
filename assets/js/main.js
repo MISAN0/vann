@@ -1,17 +1,13 @@
-// Coordinates
-// Bogor, Indonesia
+// Coordinates (city-to-city)
 const BOGOR = { name: "Bogor", lat: -6.5971, lon: 106.8060 };
-// Hobart, Tasmania
 const HOBART = { name: "Hobart", lat: -42.8821, lon: 147.3272 };
 
-// Haversine distance (km)
 function haversineKm(a, b) {
-  const R = 6371; // Earth radius in km
+  const R = 6371;
   const toRad = (x) => (x * Math.PI) / 180;
 
   const dLat = toRad(b.lat - a.lat);
   const dLon = toRad(b.lon - a.lon);
-
   const lat1 = toRad(a.lat);
   const lat2 = toRad(b.lat);
 
@@ -35,36 +31,58 @@ function updateDistanceUI() {
   const miles = km * 0.621371;
   const nmi = km / 1.852;
 
-  document.getElementById("km").value = `${format2(km)} km`;
-  document.getElementById("miles").value = `${format2(miles)} miles`;
-  document.getElementById("nmi").value = `${format2(nmi)} nmi`;
+  const kmRounded = Math.round(km).toLocaleString();
 
-  // Quote (rephrased) using the computed km (rounded)
-  const roundedKm = Math.round(km).toLocaleString();
-  document.getElementById("ldrQuote").textContent =
-    `Even with ${roundedKm} km between us, our love has stayed strong for 3 years — and I’m choosing you for a lifetime.`;
+  const kmInline = document.getElementById("kmInline");
+  if (kmInline) kmInline.textContent = `${kmRounded} km`;
+
+  const kmEl = document.getElementById("km");
+  const milesEl = document.getElementById("miles");
+  const nmiEl = document.getElementById("nmi");
+
+  if (kmEl) kmEl.value = `${format2(km)} km`;
+  if (milesEl) milesEl.value = `${format2(miles)} miles`;
+  if (nmiEl) nmiEl.value = `${format2(nmi)} nmi`;
+
+  const quoteEl = document.getElementById("ldrQuote");
+  if (quoteEl) {
+    quoteEl.textContent =
+      `Even with ${kmRounded} km between Bogor and Hobart, my heart still finds you, baby. 3 years strong, and a lifetime to go.`;
+  }
+}
+
+let mapInitialized = false;
+
+function initMapOnceWhenOpened() {
+  const collapseEl = document.getElementById("collapseOne");
+  if (!collapseEl) return;
+
+  collapseEl.addEventListener("shown.bs.collapse", () => {
+    if (mapInitialized) return;
+    mapInitialized = true;
+    initMap();
+  });
 }
 
 function initMap() {
+  const mapEl = document.getElementById("map");
+  if (!mapEl) return;
+
   const map = L.map("map", { zoomControl: true }).setView(
     [(BOGOR.lat + HOBART.lat) / 2, (BOGOR.lon + HOBART.lon) / 2],
     3
   );
 
-  // OpenStreetMap tiles
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; OpenStreetMap'
   }).addTo(map);
 
-  // Markers
   const bogorMarker = L.marker([BOGOR.lat, BOGOR.lon]).addTo(map).bindPopup("Bogor, Indonesia");
   const hobartMarker = L.marker([HOBART.lat, HOBART.lon]).addTo(map).bindPopup("Hobart, Tasmania");
 
-  // Curved-ish line: we fake a curve using a midpoint that we push outward
+  // Arc line using a pushed midpoint
   const latMid = (BOGOR.lat + HOBART.lat) / 2;
   const lonMid = (BOGOR.lon + HOBART.lon) / 2;
-
-  // Push the midpoint north/west a bit to create a romantic arc
   const curvePoint = [latMid + 8, lonMid - 10];
 
   const path = [
@@ -73,22 +91,17 @@ function initMap() {
     [HOBART.lat, HOBART.lon]
   ];
 
-  L.polyline(path, {
-    weight: 5,
-    opacity: 0.75
-  }).addTo(map);
+  L.polyline(path, { weight: 5, opacity: 0.75 }).addTo(map);
 
-  // Fit bounds
   const bounds = L.latLngBounds([
     [BOGOR.lat, BOGOR.lon],
     [HOBART.lat, HOBART.lon]
   ]);
   map.fitBounds(bounds, { padding: [40, 40] });
 
-  // Auto-open popups once
-  setTimeout(() => bogorMarker.openPopup(), 600);
-  setTimeout(() => hobartMarker.openPopup(), 1200);
+  setTimeout(() => bogorMarker.openPopup(), 500);
+  setTimeout(() => hobartMarker.openPopup(), 1100);
 }
 
 updateDistanceUI();
-initMap();
+initMapOnceWhenOpened();

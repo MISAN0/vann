@@ -5,31 +5,31 @@ const answerTitle = document.getElementById("answerTitle");
 const answerMessage = document.getElementById("answerMessage");
 
 if (answer === "yes") {
-  answerTitle.textContent = "YAYYY ❤️";
-  answerMessage.textContent = "You just made me the happiest person. Come here, my Valentine 💖";
+  answerTitle.textContent = "YAYYY, BABYYYYYYY ❤️";
+  answerMessage.textContent = "You just made my heart so happy. Come here… my Valentine 💖";
 } else {
-  answerTitle.textContent = "Nice try 😌";
-  answerMessage.textContent = "Nahhhh… you’re already mine. Forever. ❤️";
+  answerTitle.textContent = "Hehe 😌";
+  answerMessage.textContent = "Nahhhh… you’re already mine. Aku sayang kamu. Forever. ❤️";
 }
 
-// Love story lines (edited a bit to sound smoother + more romantic)
 const storyLines = [
-  "Years ago, a Bangladeshi boy messaged a cute Indonesian girl on Facebook.",
-  "That’s how our story quietly started.",
-  "We talked, we laughed, and we stayed close—even when life was messy.",
-  "We had good days, hard days, and everything in between.",
-  "We went separate ways for a while...",
-  "But somehow, we found each other again—and it felt right.",
-  "We talked and talked.",
-  "We laughed, cried, fought, and made up.",
-  "We cared deeply, loved deeply, and still chose each other.",
-  "And after all those years… we finally met.",
-  "It felt magical.",
-  "It felt like home.",
-  "We smiled. We held each other like time slowed down.",
-  "This is us—still us.",
-  "Here’s to our forever.",
-  "To all the laughs, tears, and memories still waiting for us."
+  "Long ago, a Bangladeshi boy messaged a cute Indonesian girl on Facebook.",
+  "That girl was you, Annisa.",
+  "And somehow… you became my favorite person.",
+  "We talked for hours. We laughed. We shared everything.",
+  "We had misunderstandings, and we learned how to come back stronger.",
+  "We stayed close even when life pulled us in different directions.",
+  "We missed each other. We found each other again.",
+  "And it felt like destiny saying, “Not yet. This love is real.”",
+  "Then after so many years… we finally met.",
+  "It was magical — like my heart recognized you instantly.",
+  "Your smile, your eyes, your voice… semuanya terasa tepat.",
+  "We held each other like the world paused for us.",
+  "And I knew… this is the love I want forever.",
+  "So here we are, sayang — still choosing each other.",
+  "Here’s to our future: more laughs, more hugs, more memories.",
+  "I’ll love you on the easy days and the hard days.",
+  "Always you. Always us."
 ];
 
 const storyBox = document.getElementById("story");
@@ -45,9 +45,10 @@ function showNextLine() {
     setTimeout(() => line.classList.add("visible"), 50);
 
     index++;
-    setTimeout(showNextLine, 2000);
+    setTimeout(showNextLine, 1900);
   } else {
-    document.getElementById("final-text").innerText = "I love you, Annisa ❤️ Yours forever, Nomaan";
+    document.getElementById("final-text").innerText =
+      "I love you, Annisa ❤️ Yours forever, Nomaan";
   }
 }
 

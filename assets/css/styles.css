@@ -1,0 +1,107 @@
+:root{
+  --bg1:#0b0a14;
+  --bg2:#1a0f24;
+  --bg3:#2a1333;
+
+  --soft:#f2c6d4;
+  --soft2:#ffd6e6;
+  --muted: rgba(242,198,212,0.75);
+
+  --card: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.12);
+  --shadow: 0 18px 60px rgba(0,0,0,0.35);
+}
+
+.romantic-bg{
+  min-height: 100vh;
+  background: radial-gradient(1200px 600px at 20% 10%, rgba(255,105,180,0.14), transparent 60%),
+              radial-gradient(900px 500px at 90% 30%, rgba(173,99,255,0.12), transparent 60%),
+              linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+  color: white;
+}
+
+.glass-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.title-glow{
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  text-shadow: 0 0 18px rgba(255, 153, 204, 0.25);
+}
+
+.text-soft{ color: var(--soft2); }
+.text-muted-soft{ color: var(--muted); }
+
+.soft-input{
+  background: rgba(0,0,0,0.25) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  color: white !important;
+}
+.soft-input::placeholder{ color: rgba(255,255,255,0.4); }
+
+.badge-soft{
+  background: rgba(255, 182, 193, 0.16);
+  border: 1px solid rgba(255, 182, 193, 0.22);
+  color: var(--soft2);
+}
+
+.map-box{
+  height: 420px;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.btn-love{
+  background: linear-gradient(135deg, rgba(255,105,180,0.9), rgba(173,99,255,0.85));
+  border: none;
+  color: white;
+  box-shadow: 0 12px 30px rgba(255,105,180,0.18);
+}
+.btn-love:hover{ filter: brightness(1.06); }
+
+.btn-outline-love{
+  border: 1px solid rgba(255, 182, 193, 0.55);
+  color: var(--soft2);
+  background: rgba(0,0,0,0.15);
+}
+.btn-outline-love:hover{
+  background: rgba(255, 182, 193, 0.12);
+  border-color: rgba(255, 182, 193, 0.8);
+  color: white;
+}
+
+.story-box{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 260px;
+}
+
+.story-line{
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 700ms ease, transform 700ms ease;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255, 240, 246, 0.92);
+}
+
+.story-line.visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.final-text{
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--soft2);
+  text-shadow: 0 0 18px rgba(255, 153, 204, 0.18);
+}

@@ -4,11 +4,34 @@ const answer = (params.get("answer") || "yes").toLowerCase();
 const answerTitle = document.getElementById("answerTitle");
 const answerMessage = document.getElementById("answerMessage");
 
+function heartBurst() {
+h.style.setProperty("--dx", `${Math.random() * 120 - 60}px`);
+  const burstCount = window.matchMedia("(max-width: 768px)").matches ? 14 : 22;
+
+  for (let i = 0; i < burstCount; i++) {
+    const h = document.createElement("div");
+    h.className = "heart-burst";
+    h.textContent = "💖";
+
+    const x = 50 + (Math.random() * 40 - 20); // around center
+    const y = 30 + (Math.random() * 20 - 10);
+
+    h.style.left = `${x}%`;
+    h.style.top = `${y}%`;
+    h.style.animationDelay = `${Math.random() * 0.35}s`;
+
+    document.body.appendChild(h);
+
+    setTimeout(() => h.remove(), 1400);
+  }
+}
+
 if (answer === "yes") {
+    setTimeout(heartBurst, 400);  
   answerTitle.textContent = "YAYYY, BABYYYYYYY ❤️";
   answerMessage.textContent = "You just made my heart so happy. Come here… my Valentine 💖";
 } else {
-  answerTitle.textContent = "Hehe 😌";
+  answerTitle.textContent = "Hehehe 😌";
   answerMessage.textContent = "Nahhhh… you’re already mine. Aku sayang kamu. Forever. ❤️";
 }
 

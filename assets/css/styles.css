@@ -116,20 +116,56 @@
   box-shadow: none;
 }
 
-/* Sticky CTA for phones */
-.sticky-cta{
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 10px 0 12px;
-  background: rgba(10, 8, 20, 0.75);
-  border-top: 1px solid rgba(255,255,255,0.10);
-  backdrop-filter: blur(10px);
-}
+
 
 /* Prevent content being hidden behind sticky buttons */
 @media (max-width: 767.98px){
-  body{ padding-bottom: 84px; }
   .map-box{ height: 280px; }
+}
+
+/* Floating hearts background */
+.hearts-layer{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floating-heart{
+  position: absolute;
+  bottom: -40px;
+  opacity: 0.0;
+  filter: drop-shadow(0 6px 18px rgba(255, 105, 180, 0.12));
+  animation-name: floatUp;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes floatUp{
+  0%   { transform: translate3d(0, 0, 0) scale(0.95); opacity: 0; }
+  10%  { opacity: 0.22; }
+  50%  { opacity: 0.14; transform: translate3d(var(--drift), -52vh, 0) scale(1.05); }
+  90%  { opacity: 0.18; }
+  100% { transform: translate3d(calc(var(--drift) * -0.3), -105vh, 0) scale(1.08); opacity: 0; }
+}
+
+/* Keep your content above the hearts */
+main, .container { position: relative; z-index: 1; }
+
+.heart-burst{
+  position: fixed;
+  z-index: 3;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  animation: burstPop 1.2s ease forwards;
+  filter: drop-shadow(0 10px 22px rgba(255,105,180,0.18));
+}
+
+@keyframes burstPop{
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
+  15%  { opacity: 0.9; }
+  100% { opacity: 0; transform: translate(calc(-50% + (var(--dx, 0px))), calc(-50% - 160px)) scale(1.2); }
 }

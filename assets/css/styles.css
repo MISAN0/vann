@@ -169,3 +169,12 @@ main, .container { position: relative; z-index: 1; }
   15%  { opacity: 0.9; }
   100% { opacity: 0; transform: translate(calc(-50% + (var(--dx, 0px))), calc(-50% - 160px)) scale(1.2); }
 }
+
+@media (max-width: 575.98px){
+  .hero-card{ padding: 20px !important; }
+  .mini-tag{ font-size: 0.92rem; }
+  .hero-sub{ line-height: 1.35; }
+  .btn-love, .btn-outline-love{ width: 100%; }
+  .story-line{ padding: 10px 12px; }
+  .glass-card{ border-radius: 16px; }
+}
